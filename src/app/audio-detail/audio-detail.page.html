@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{audioData?.title}}</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="shareAudio()">
+        <ion-icon slot="icon-only" name="share"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding scrollY="false">
+  <div class="banner">
+    <img src="../../assets/img/bapuji.jpg" alt="">
+  </div>
+
+  <div class="controls">
+    <div class="trackbar">
+      <ion-range class="progress-range" [(ngModel)]="progress" min="0" [max]="totalDuration"
+        (ionChange)="changeProgress()" color="secondary">
+      </ion-range>
+      <div class="progress-labels">
+        <ion-label class="start">{{duration | minuteSeconds}}</ion-label>
+        <ion-label class="end">-{{remaining | minuteSeconds}}</ion-label>
+      </div>
+    </div>
+    <div class="details">
+      <div class="title">
+        <h1>{{audioData?.title}}</h1>
+      </div>
+      <div class="subtitle">
+        <span>{{audioData?.subTitle}}</span>
+      </div>
+    </div>
+
+
+    <div class="play-btn">
+      <ion-icon (click)="toggle()" [name]="isPlaying ? 'pause' : 'play'"></ion-icon>
+    </div>
+    <div class="volume">
+      <ion-range [(ngModel)]="volume" min="0" max="100" (ionChange)="changeVolume()" color="secondary"></ion-range>
+    </div>
+  </div>
+</ion-content>

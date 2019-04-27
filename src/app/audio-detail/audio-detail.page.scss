@@ -1,0 +1,68 @@
+ion-range {
+    --knob-size: 20px;
+}
+
+.banner {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding-top: 10px;
+
+    img {
+        width: 80%;
+    }
+}
+
+.controls {
+    .trackbar {
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+
+        .progress-range {
+            padding-left: 15px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .progress-labels {
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .details {
+        text-align: center;
+        margin-bottom: 10px;
+
+        .title {
+            font-size: 25px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #b1b0b0;
+        }
+    }
+
+    .volume {
+        width: 95%;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
+    }
+
+    .play-btn {
+        font-size: 40px;
+        text-align: center;
+        height: 25px;
+        margin: 0 auto;
+        position: absolute;
+        bottom: 90px;
+        left: 0;
+        right: 0;
+    }
+}

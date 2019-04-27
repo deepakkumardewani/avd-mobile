@@ -2,3 +2,23 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+.subTitle {
+  font-size: 17px;
+}
+
+.disabled {
+  color: gray;
+}
+.enabled {
+  color: black;
+}
+.spinner {
+  text-align: center;
+  height: 100%;
+  .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
