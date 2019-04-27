@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "495744037404",
+    "firebase_url": "https://anand-vrindavan-dham.firebaseio.com",
+    "project_id": "anand-vrindavan-dham",
+    "storage_bucket": "anand-vrindavan-dham.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495744037404:android:cd36b5617fdd9105",
+        "android_client_info": {
+          "package_name": "com.avd.bapuji"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495744037404-27rv4q0t9dtg69du223tfi969b3sofuo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPNgUe_yZvmMWsk16Qn40pU8J4zYz91CA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495744037404-27rv4q0t9dtg69du223tfi969b3sofuo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "495744037404-9o6gl2mom022u7oi4k2u5l8e13u6leab.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.avd.bapuji"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
