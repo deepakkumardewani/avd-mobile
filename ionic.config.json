@@ -1,5 +1,7 @@
 {
   "name": "avd",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
