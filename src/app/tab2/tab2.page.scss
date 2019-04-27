@@ -1,1 +1,25 @@
+.darshan-card {
+    height: 150px;
+    margin: 10px;
+    margin-right: 0px;
+    width: 95vw;
+    .spinner {
+      margin: 0 auto;
+      text-align: center;
+    }
+    .placeholder {
+      height: 150px;
+      background: red;
+      width: 95vw;
+    }
+}
 
+.spinner {
+    text-align: center;
+    height: 100%;
+    .helper {
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
+  }
