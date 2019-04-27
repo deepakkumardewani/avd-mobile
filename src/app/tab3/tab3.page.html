@@ -1,9 +1,34 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      Videos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <div class="spinner" *ngIf="isLoading">
+        <span class="helper"></span>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+  <ion-list lines="none">
+    <ion-item *ngFor="let video of videos" no-padding>
+        <ion-card no-padding>
+            <img (click)="presentModal(video)" [src]="video?.thumbnail">
+            <ion-card-content>
+                <ion-label text-wrap>
+                    <h2 class="video-title">{{video?.title}}</h2>
+                    <p class="video-count">{{video?.viewCount | shortNumber}} views</p>
+                    <!-- <p>{{video?.description | slice:0:70}}...</p> -->
+                </ion-label>
+            </ion-card-content>
+          </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
