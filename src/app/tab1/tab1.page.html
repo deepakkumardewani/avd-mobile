@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>Audios</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="refresh()">
-        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      <ion-button (click)="refresh()" [disabled]="isDownloadBtnDisabled">
+        <ion-icon [ngClass]="{'disabled': isDownloadBtnDisabled}" slot="icon-only" name="refresh"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -11,7 +11,7 @@
 
 <ion-content>
   <div class="spinner" *ngIf="isLoading">
-      <span class="helper"></span>
+    <span class="helper"></span>
     <ion-spinner name="crescent"></ion-spinner>
   </div>
   <ion-list class="audio-list">
@@ -23,21 +23,25 @@
         <p *ngIf="audio?.isDownloading">{{audio?.progress}}%</p>
       </ion-label>
       <ion-icon slot="" *ngIf="audio?.isDownloaded | async" name="checkmark"></ion-icon>
-      <ion-button fill="clear" *ngIf="!(audio?.isDownloaded | async)" [disabled]="isDownloadBtnDisabled" (click)="download(audio)">
-        <ion-icon [ngClass]="{'disabled': isDownloadBtnDisabled, 'enabled': !isDownloadBtnDisabled }" slot="icon-only" name="arrow-round-down"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="presentModal(audio)">
-          <ion-icon [ngClass]="{'disabled': !(audio?.isDownloaded | async), 'enabled': audio?.isDownloaded | async }" slot="icon-only" name="play"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="removeFile(audio)">
-        <ion-icon [ngClass]="{'disabled': !(audio?.isDownloaded | async), 'enabled': (audio?.isDownloaded | async) }" slot="icon-only" name="trash"></ion-icon>
-      </ion-button>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" *ngIf="!(audio?.isDownloaded | async)" [disabled]="isDownloadBtnDisabled"
+          (click)="download(audio)">
+          <ion-icon [ngClass]="{'disabled': isDownloadBtnDisabled, 'enabled': !isDownloadBtnDisabled }" slot="icon-only"
+            name="arrow-round-down"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="presentModal(audio)">
+          <ion-icon [ngClass]="{'disabled': !(audio?.isDownloaded | async), 'enabled': audio?.isDownloaded | async }"
+            slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="presentDeleteAlert(audio)">
+          <ion-icon [ngClass]="{'disabled': !(audio?.isDownloaded | async), 'enabled': (audio?.isDownloaded | async) }"
+            slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
