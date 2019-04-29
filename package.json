@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ios:sim": "ionic cordova run ios -l -- --buildFlag='-UseModernBuildSystem=0'",
-    "android:sim": "ionic cordova run android -l -- --buildFlag='-UseModernBuildSystem=0'",
+    "android:sim": "ionic cordova run android -l",
     "ios:build": "ionic cordova build ios --prod -- --buildFlag='-UseModernBuildSystem=0'",
     "android:build": "ionic cordova build android --prod",
     "serve": "ionic serve --lab --devapp -c --disableHostCheck --no-proxy"
@@ -106,8 +106,8 @@
       "cordova-plugin-firebase": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
