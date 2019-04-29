@@ -124,7 +124,7 @@ export class AudioDetailPage implements OnInit, OnDestroy {
   }
 
   normalizeURL(title) {
-    const url = `${cordova.file.dataDirectory}audios/${title}`;
+    const url = `${cordova.file.dataDirectory}audios/${title}.mp3`;
     return url.replace(/^file:\/\//, '');
   }
 }
