@@ -43,11 +43,12 @@ export class DarshanGalleryPage implements OnInit {
 
   async shareImage() {
     const activeIndex = await this.slides.getActiveIndex();
+    const url = `${cordova.file.dataDirectory.replace(/^file:\/\//, '')}images/${this.images[activeIndex].fileName}`;
     this.socialSharing
       .share(
         '',
         '',
-        this.normalizeURL(this.images[activeIndex].title),
+        url,
         ''
       )
       .then(() => {
