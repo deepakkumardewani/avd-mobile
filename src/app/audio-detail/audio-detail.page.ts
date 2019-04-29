@@ -6,7 +6,7 @@ import {
   Input,
   OnDestroy
 } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Media, MediaObject } from '@ionic-native/media/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
@@ -23,7 +23,7 @@ export class AudioDetailPage implements OnInit, OnDestroy {
 
   isPlaying = true;
   duration = 0;
-  totalDuration = 81;
+  totalDuration = 0;
   remaining = 0;
   remainingDuration = 0;
   position = 0;
@@ -37,12 +37,20 @@ export class AudioDetailPage implements OnInit, OnDestroy {
   constructor(
     public modalController: ModalController,
     private media: Media,
-    private socialSharing: SocialSharing
+    private socialSharing: SocialSharing,
+    private platform: Platform
   ) {}
 
   ngOnInit() {
     this.file = this.media.create(this.normalizeURL(this.audioData.title));
     this.file.play();
+    if (this.platform.is('android')) {
+      this.file.pause();
+      this.remaining = Math.floor(this.file.getDuration());
+      setTimeout(() => {
+        this.file.play();
+      }, 1000);
+    }
     this.file.onStatusUpdate.subscribe(() => {
       // only assign duration when audio loads first
       if (!this.isLoaded) {
