@@ -6,11 +6,11 @@ import { Storage } from '@ionic/storage';
 import { FcmService } from '../app/fcm.service';
 
 import { ToastController } from '@ionic/angular';
-import { Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Darshan } from './models/darshan';
 import { Audio } from './models/audio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +23,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private storage: Storage,
     public fcm: FcmService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -33,24 +34,22 @@ export class AppComponent {
       // Get a FCM token
       this.fcm.getToken();
 
-      this.fcm.listenToNotifications().subscribe(async msg => {
-        const toast = await this.toastCtrl.create({
-          message: msg.body,
-          duration: 10000
-        });
-        toast.present();
-      });
       // Listen to incoming messages
       this.fcm
         .listenToNotifications()
         .pipe(
           tap(async msg => {
-            // show a toast
-            const toast = await this.toastCtrl.create({
-              message: msg.body,
-              duration: 10000
-            });
-            toast.present();
+            this.router.navigateByUrl(msg.page);
+
+            if (this.platform.is('ios')) {
+              // show a toast
+            // const toast = await this.toastCtrl.create({
+            //   message: msg.aps.alert.body,
+            //   duration: 3000
+            // });
+            // toast.present();
+            }
+
           })
         )
         .subscribe();
