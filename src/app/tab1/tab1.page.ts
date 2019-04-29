@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ModalController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import {
@@ -38,7 +39,8 @@ export class Tab1Page implements OnInit {
     public toastController: ToastController,
     private storage: Storage,
     // tslint:disable-next-line: deprecation
-    private transfer: FileTransfer
+    private transfer: FileTransfer,
+    public alertController: AlertController
   ) {
     const self = this;
     this.audios = [];
@@ -86,6 +88,7 @@ export class Tab1Page implements OnInit {
     const fileTransfer: FileTransferObject = this.transfer.create();
     this.isDownloadBtnDisabled = true;
     audio.isDownloading = true;
+    audio.progress = 0;
     fileTransfer
       .download(url, cordova.file.dataDirectory + 'audios/' + title + '.mp3')
       .then(
@@ -174,5 +177,32 @@ export class Tab1Page implements OnInit {
   async errorToast(msg) {
     const toast = await this.helper.errorToast(msg, 2000);
     toast.present();
+  }
+
+  async presentDeleteAlert(audio: Audio) {
+    const alert = await this.alertController.create({
+      header: 'Hare Krishna',
+      subHeader: '',
+      message: 'This will delete the audio. Are you sure?',
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'delete',
+          cssClass: 'delete-button',
+          handler: (_) => {
+            this.removeFile(audio);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (_) => {
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
