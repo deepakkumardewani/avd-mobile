@@ -5,6 +5,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -18,6 +19,10 @@ import { File } from '@ionic-native/file/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { SafariViewController } from '@ionic-native/safari-view-controller/ngx';
+
 
 import { VideoDetailPageModule } from './video-detail/video-detail.module';
 import { DarshanGalleryPageModule } from './darshan-gallery/darshan-gallery.module';
@@ -52,6 +57,7 @@ const firebase = {
     VideoDetailPageModule,
     IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(firebase),
+    AngularFireDatabaseModule,
     AngularFirestoreModule
   ],
   providers: [
@@ -62,6 +68,9 @@ const firebase = {
     File,
     Device,
     FileTransfer,
+    SafariViewController,
+    InAppBrowser,
+    EmailComposer,
     WebView,
     SocialSharing,
     Firebase,
