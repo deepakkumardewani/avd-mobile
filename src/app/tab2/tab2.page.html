@@ -14,19 +14,30 @@
         <span class="helper"></span>
       <ion-spinner name="crescent"></ion-spinner>
     </div>
+  <!-- <ion-list *ngIf="isLoading">
+    <ion-item no-margin no-padding lines="none" *ngFor="let image of darshan">
+      <ion-card class="darshan-card">
+        <div class="placeholder"></div>
+      </ion-card>
+    </ion-item>
+  </ion-list> -->
   <ion-list *ngIf="!isLoading">
     <ion-item no-margin no-padding lines="none" *ngFor="let image of darshan; let i = index">
       <ion-card class="darshan-card">
-        <ion-img (ionImgDidLoad)="image.isLoaded = true" (click)="presentModal(darshan, i)" [src]="image?.url"></ion-img>
-        <!-- <ion-img (load)="image.isLoaded = true" (click)="presentModal(darshan, i)" [src]="(image?.isDownloaded | async) ? normalizeURL(image?.fileName) : image?.url"></ion-img> -->
-        <div class="spinner" *ngIf="!image?.isLoaded">
+
+        <!-- <ion-img (load)="image.isLoaded = true" (click)="presentModal(darshan, i)" [src]="image?.url"></ion-img> -->
+        <ion-img (load)="image.isLoaded = true" (click)="presentModal(darshan, i)"
+          [src]="(image?.isDownloaded | async) ? normalizeURL(image?.fileName) : image?.url"></ion-img>
+          <div *ngIf="!image?.isLoaded" class="placeholder"></div>
+        <!-- <div class="spinner" *ngIf="!image?.isLoaded || !image?.isError">
           <span class="helper"></span>
           <ion-spinner name="crescent"></ion-spinner>
-        </div>
+        </div> -->
+        <!-- <ion-button *ngIf="image?.isError">
+          <span class="helper"></span>
+          <ion-icon slot="icon-only" name="refresh"></ion-icon>
+        </ion-button> -->
       </ion-card>
-      <!-- <p>{{image?.isDownloaded | async}}</p>
-      <p>{{image?.fileName}}</p> -->
-      <!-- <p>{{image?.local}}</p> -->
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,25 +1,53 @@
+// Animation
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 800px 104px;
+  // height: 96px;
+  position: relative;
+}
+
 .darshan-card {
+  height: 150px;
+  margin: 10px;
+  margin-right: 0px;
+  width: 95vw;
+
+  .spinner {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .placeholder {
     height: 150px;
-    margin: 10px;
-    margin-right: 0px;
+    // background: red;
+    @extend .animated-background;
     width: 95vw;
-    .spinner {
-      margin: 0 auto;
-      text-align: center;
-    }
-    .placeholder {
-      height: 150px;
-      background: red;
-      width: 95vw;
-    }
+
+  }
 }
 
 .spinner {
-    text-align: center;
-    height: 100%;
-    .helper {
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-    }
-  }
+  text-align: center;
+  height: 100%;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
