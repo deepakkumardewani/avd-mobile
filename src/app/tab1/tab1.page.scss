@@ -1,10 +1,51 @@
+// Animation
+@keyframes placeHolderShimmer{
+  0%{
+      background-position: -468px 0
+  }
+  100%{
+      background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 800px 104px;
+  // height: 96px;
+  position: relative;
+}
+
 .welcome-card ion-img {
   max-height: 35vh;
   overflow: hidden;
 }
 
+.loading {
+  @extend .animated-background;
+}
+
 .subTitle {
   font-size: 17px;
+}
+
+.loading {
+  @extend .animated-background;
+}
+.title-loading {
+  @extend .animated-background;
+  height: 20px;
+  width: 50vw;
+}
+.subTitle-loading {
+  @extend .animated-background;
+  width: 50vw;
+  height: 20px;
 }
 
 .disabled {
@@ -22,3 +63,5 @@
     vertical-align: middle;
   }
 }
+
+
