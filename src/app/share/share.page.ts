@@ -17,7 +17,7 @@ export class SharePage implements OnInit {
     private socialSharing: SocialSharing,
     private db: AngularFireDatabase,
     private platform: Platform
-    ) { }
+  ) { }
 
   ngOnInit() {
     if (this.platform.is('ios')) {
@@ -33,14 +33,17 @@ export class SharePage implements OnInit {
   }
 
   shareApp() {
-    this.socialSharing
-      .share(
-        null,
-        null,
-        this.shareUrl,
-        null
-      )
-      .then(() => {})
-      .catch(() => {});
+    if (this.shareUrl) {
+      this.socialSharing
+        .share(
+          `Shri Madhusudan Bapuji\n${this.shareUrl}`,
+          null,
+          null,
+          null
+        )
+        .then(() => { })
+        .catch(() => { });
+    }
+
   }
 }
