@@ -1,16 +1,13 @@
-
 ion-content {
     ion-list {
         ion-item {
             --ion-safe-area-right: 0;
-            .thumbnail {
-                object-fit: cover;
-                    width: 100%;
+            ion-card {
+                width: 100%;
+                img {
                     height: 150px;
-                    img {
-                        height: 150px;
-                        width: 100%;
-                    }
+                    width: 100%;
+                }
             }
             ion-card {
                 margin: 0 !important;
@@ -27,14 +24,13 @@ ion-content {
                         }
                     }
                 }
+
                 img {
                     object-fit: cover;
                     width: 100%;
                     height: 150px;
                 }
-              }
-
-
+            }
         }
     }
 }
@@ -42,9 +38,10 @@ ion-content {
 .spinner {
     text-align: center;
     height: 100%;
+
     .helper {
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
     }
-  }
+}
