@@ -2,23 +2,43 @@ ion-content {
     ion-list {
         ion-item {
             --ion-safe-area-right: 0;
+
             ion-card {
                 width: 100%;
+
+                .img-card {
+                    position: relative;
+
+                    .video-duration {
+                        background: black;
+                        color: white;
+                        position: absolute;
+                        right: 8px;
+                        bottom: 8px;
+                        border-radius: 3px;
+                        padding: 2px;
+                    }
+                }
+
                 img {
                     height: 150px;
                     width: 100%;
                 }
             }
+
             ion-card {
                 margin: 0 !important;
                 border-radius: 0;
+
                 ion-card-content {
                     padding: 10px;
                     padding-bottom: 25px;
+
                     ion-label {
                         .video-title {
                             color: black;
                         }
+
                         .video-count {
                             font-weight: 450;
                         }

@@ -14,7 +14,10 @@
   <ion-list lines="none">
     <ion-item *ngFor="let video of videos" no-padding>
         <ion-card no-padding>
+          <div class="img-card">
             <img (click)="presentModal(video)" [src]="video?.thumbnail">
+            <span class="video-duration">{{YTDurationToSeconds(video?.duration) | minuteSeconds}}</span>
+          </div>
             <ion-card-content>
                 <ion-label text-wrap>
                     <h2 class="video-title">{{video?.title}}</h2>
