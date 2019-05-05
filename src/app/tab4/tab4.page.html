@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      More
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item detail="true" routerLink="/about">
+      <ion-icon name="information-circle"></ion-icon>
+      <ion-button size="default" color="dark" fill="clear" expand="block" routerDirection="forward">About</ion-button>
+    </ion-item>
+    <ion-item detail="true" routerLink="/contact">
+      <ion-icon name="mail"></ion-icon>
+      <ion-button size="default" color="dark" fill="clear" expand="block" routerDirection="forward">Contact</ion-button>
+    </ion-item>
+    <ion-item detail="true" routerLink="/share">
+      <ion-icon name="share"></ion-icon>
+      <ion-button size="default" color="dark" fill="clear" expand="block" routerDirection="forward">Share</ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-item-group>
+      <ion-item-divider color="light"></ion-item-divider>
+      <ion-item>
+        <ion-button fill="clear" size="default" class="clear-cache" (click)="clearCache()">Clear cache</ion-button>
+      </ion-item>
+    </ion-item-group>
+</ion-content>
