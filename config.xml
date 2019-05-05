@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.avd.bapuji" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Shri Madhusudhan Bapuji</name>
+<widget id="com.avd.bapuji" version="1.7.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Shri Madhusudan Bapuji</name>
     <description>This application provides daily audio and video lectures by HG Shri Madhusudhan Bapuji. It also provides the devotee daily darshan of Shri Shri Radha Vrindavan Chandra.</description>
     <author email="anandvrindavandham@gmail.com" href="https://anandvrindavan.com">Anand Vrindavan Dham</author>
     <content src="index.html" />
@@ -102,7 +102,7 @@
     <plugin name="cordova-plugin-email-composer" spec="^0.9.2">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
-    <engine name="ios" spec="4.5.5" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-safariviewcontroller" spec="^1.6.0" />
+    <engine name="android" spec="7.0.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>
