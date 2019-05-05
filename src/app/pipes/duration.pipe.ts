@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
       transform(value: number): string {
          const minutes: number = Math.floor(value / 60);
-         return minutes.toString().padStart(2, '0') + ':' +
+         return minutes.toString().padStart(1, '0') + ':' +
              (value - minutes * 60).toString().padStart(2, '0');
       }
   }
