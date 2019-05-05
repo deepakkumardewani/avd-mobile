@@ -69,7 +69,7 @@ export class AboutPage implements OnInit {
             );
         } else {
           // use fallback browser, example InAppBrowser
-          this.iab.create(url, '_blank');
+          this.iab.create(url, '_system');
         }
       }
       );
