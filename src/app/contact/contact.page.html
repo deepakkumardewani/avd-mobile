@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Contact</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab4"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color='light'>
+  <ion-item-group class="address">
+    <ion-item-divider color="light">Address</ion-item-divider>
+    <ion-item text-wrap lines="none">
+      Shri Madhusudan Bapuji Ashram, Anand Vrindavan Dham, Ulhasnagar - 421003, Maharastra, India
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+    <ion-item text-wrap lines="none">
+      <!-- <ion-label class="">Phone</ion-label>
+       -->
+       <span class="phone-label">Phone</span>
+      <a href="tel:9422485242">9422485242</a>&nbsp;/&nbsp;
+      <a href="tel:7303552336">7303552336</a>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+    <ion-item class="feedback" (click)="sendFeedback()" text-wrap lines="none">
+      <ion-button fill="clear" class="feedback-button">Send Feedback</ion-button>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+  </ion-item-group>
+</ion-content>

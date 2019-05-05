@@ -1,0 +1,18 @@
+.title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.description {
+    padding: 10px;
+    padding-left: 0;
+}
+
+.icon-img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+ion-item {
+    --ion-safe-area-right: 0;
+}

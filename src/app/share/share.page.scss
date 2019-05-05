@@ -1,0 +1,23 @@
+ion-item {
+    --ion-safe-area-right: 0;
+}
+
+ion-list {
+    margin-bottom: 20px;
+}
+
+.share {
+    text-align: center;
+
+    .share-button {
+        --border-color: #FFB22C;
+        --color: #FFB22C;
+    }
+}
+
+.mahamantra {
+    font-size: 25px;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 12px;
+}
