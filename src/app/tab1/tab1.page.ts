@@ -41,48 +41,49 @@ export class Tab1Page implements OnInit {
     // tslint:disable-next-line: deprecation
     private transfer: FileTransfer,
     public alertController: AlertController
-  ) {
+  ) {}
+
+  ngOnInit() {
     const self = this;
     this.audios = [];
+    this.addDummyData(30);
     this.helper.getAllAudio(this.page, this.limit).subscribe((result: any) => {
       this.totalAudios = result.total;
-      this.audios = result.docs.map((audio) => {
+      for (let i = 0; i < result.docs.length; i++) {
+        const audio = result.docs[i];
         const { title, url, subTitle } = audio;
-        return new Audio({
+        this.audios[i] = {
           title,
           url,
           subTitle,
           isSaved: false,
           isDownloaded: self.checkIfDownloaded(title)
-        });
-      });
+        };
+      }
       this.isLoading = false;
     });
-
   }
-
-  ngOnInit() {}
 
   checkIfDownloaded(title): Promise<boolean> {
     return this.file
-    .checkFile(cordova.file.dataDirectory + 'audios/', title + '.mp3').
-    then(_ => {
-      return true;
-    }).
-    catch(_ => {
-      return false;
-    });
- }
+      .checkFile(cordova.file.dataDirectory + 'audios/', title + '.mp3').
+      then(_ => {
+        return true;
+      }).
+      catch(_ => {
+        return false;
+      });
+  }
 
- removeFile(audio: Audio) {
-  this.file.removeFile(cordova.file.dataDirectory + 'audios/', audio.title + '.mp3')
-  .then(_ => {
-    audio.isDownloaded = this.checkIfDownloaded(audio.title);
-  })
-  .catch(_ => {
-    audio.isDownloaded = this.checkIfDownloaded(audio.title);
-  });
- }
+  removeFile(audio: Audio) {
+    this.file.removeFile(cordova.file.dataDirectory + 'audios/', audio.title + '.mp3')
+      .then(_ => {
+        audio.isDownloaded = this.checkIfDownloaded(audio.title);
+      })
+      .catch(_ => {
+        audio.isDownloaded = this.checkIfDownloaded(audio.title);
+      });
+  }
   download(audio: Audio) {
     const { title, url } = audio;
     const fileTransfer: FileTransferObject = this.transfer.create();
@@ -99,7 +100,6 @@ export class Tab1Page implements OnInit {
         },
         _ => {
           // handle error
-          // this.errorToast(JSON.stringify(error));
           this.errorToast('Hare Krishna. There was some error. Please try again.');
           this.isDownloadBtnDisabled = false;
           audio.isDownloading = false;
@@ -120,21 +120,23 @@ export class Tab1Page implements OnInit {
   refresh() {
     const self = this;
     this.audios = [];
+    this.addDummyData(30);
     this.isLoading = true;
     this.page = 1;
     this.infiniteScroll.disabled = false;
     this.helper.getAllAudio(this.page, this.limit).subscribe((result: any) => {
       this.totalAudios = result.total;
-      this.audios = result.docs.map((audio) => {
+      for (let i = 0; i < result.docs.length; i++) {
+        const audio = result.docs[i];
         const { title, url, subTitle } = audio;
-        return new Audio({
+        this.audios[i] = {
           title,
           url,
           subTitle,
           isSaved: false,
           isDownloaded: self.checkIfDownloaded(title)
-        });
-      });
+        };
+      }
       this.isLoading = false;
     });
   }
@@ -152,7 +154,7 @@ export class Tab1Page implements OnInit {
 
   loadData(event) {
     const self = this;
-    this.page ++;
+    this.page++;
     this.helper.getAllAudio(this.page, this.limit).subscribe((result: any) => {
       const audios = result.docs.map((audio) => {
         const { title, url, subTitle } = audio;
@@ -164,7 +166,7 @@ export class Tab1Page implements OnInit {
           isDownloaded: self.checkIfDownloaded(title)
         });
       });
-      this.audios = [ ...this.audios, ...audios];
+      this.audios = [...this.audios, ...audios];
       this.isLoading = false;
       event.target.complete();
 
@@ -204,5 +206,12 @@ export class Tab1Page implements OnInit {
     });
 
     await alert.present();
+  }
+
+  addDummyData(length) {
+    for (let i = 0; i < length; i++) {
+      const audio = new Audio({ title: '', subTitle: '', url: '', isSaved: false, isDownloading: false, isDownloaded: false });
+      this.audios.push(audio);
+    }
   }
 }
