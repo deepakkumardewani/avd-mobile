@@ -21,8 +21,10 @@
             <ion-card-content>
                 <ion-label text-wrap>
                     <h2 class="video-title">{{video?.title}}</h2>
-                    <p class="video-count">{{video?.viewCount | shortNumber}} views</p>
-                    <!-- <p>{{video?.description | slice:0:70}}...</p> -->
+                    <div class="details">
+                      <p class="video-count">{{video?.viewCount | shortNumber}} views</p>
+                      <p class="video-published">{{video?.publishedAt | dateAgo }}</p>
+                    </div>
                 </ion-label>
             </ion-card-content>
           </ion-card>

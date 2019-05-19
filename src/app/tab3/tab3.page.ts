@@ -15,11 +15,14 @@ export class Tab3Page {
   isLoading = true;
   token = '';
   totalData = 0;
+  publishedAt: string;
+
   constructor(
     private helper: HelperService,
     public modalController: ModalController
   ) {
     this.helper.getVideoList(this.token).subscribe((result: any) => {
+      this.publishedAt = result.publishedAt;
       this.videos = result.videos;
       this.totalData = result.totalResults;
       this.isLoading = false;

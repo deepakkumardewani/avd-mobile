@@ -39,9 +39,23 @@ ion-content {
                             color: black;
                         }
 
-                        .video-count {
-                            font-weight: 450;
+                        .details {
+                            display: flex;
+
+                            .video-published {
+                                font-weight: 450;
+                            }
+                            .video-count::after {
+                                content: '•';
+                                margin: 7px;
+                            }
+
+                            .video-count {
+                                font-weight: 450;
+                            }
                         }
+
+
                     }
                 }
 
