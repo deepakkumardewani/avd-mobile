@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:495744037404:android:cd36b5617fdd9105",
+        "mobilesdk_app_id": "1:495744037404:android:34ce2dd9071be028",
         "android_client_info": {
-          "package_name": "com.avd.bapuji"
+          "package_name": "com.deepakdewani.bapuji"
         }
       },
       "oauth_client": [
