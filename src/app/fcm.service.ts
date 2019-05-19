@@ -38,12 +38,14 @@ export class FcmService {
     private saveTokenToFirestore(token) {
       if (!token) { return; }
 
+      const date = new Date();
       const devicesRef = this.afs.collection('devices');
 
-      const userId = `${this.device.model}-${this.device.uuid}`;
+      const userData = `${this.device.manufacturer} - ${this.device.model} - ${this.device.version} - (${this.device.uuid})`;
       const docData = {
         token,
-        userId,
+        userData,
+        date
       };
 
       return devicesRef.doc(token).set(docData);
