@@ -13,7 +13,7 @@
     "ios:sim": "ionic cordova run ios -l -- --buildFlag='-UseModernBuildSystem=0'",
     "android:sim": "ionic cordova run android -l",
     "ios:build": "ionic cordova build ios --prod -- --buildFlag='-UseModernBuildSystem=0'",
-    "android:build": "ionic cordova build android --prod",
+    "android:build": "ionic cordova build android --prod --release",
     "serve": "ionic serve --lab --devapp -c --disableHostCheck --no-proxy"
   },
   "private": true,
@@ -63,6 +63,7 @@
     "core-js": "^2.5.4",
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^5.10.0",
+    "mx.ferreyra.callnumber": "~0.0.2",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },
@@ -118,8 +119,8 @@
       "cordova-plugin-safariviewcontroller": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
