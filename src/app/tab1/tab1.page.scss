@@ -30,6 +30,17 @@
   @extend .animated-background;
 }
 
+.toolbar-title {
+  overflow: visible;
+  position: relative;
+  .subtitle {
+    position: absolute;
+    top: 8px;
+    font-size: 66%;
+    margin: 0;
+  }
+}
+
 .subTitle {
   font-size: 17px;
 }
