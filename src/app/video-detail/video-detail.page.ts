@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import {DomSanitizer} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
@@ -30,7 +30,7 @@ export class VideoDetailPage implements OnInit {
   }
 
 
-  shareImage() {
+  shareVideo() {
     this.socialSharing
       .share(
         `https://youtu.be/${this.videoData.id}`,
