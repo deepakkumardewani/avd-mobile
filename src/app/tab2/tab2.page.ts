@@ -1,4 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import {
@@ -22,6 +24,8 @@ export class Tab2Page {
   darshan: Darshan[];
   isLoading = true;
   count = 0;
+  date: string;
+
   constructor(
     private helper: HelperService,
     public modalController: ModalController,
@@ -30,11 +34,14 @@ export class Tab2Page {
     private storage: Storage,
     private webview: WebView,
     private file: File,
+    public sanitizer: DomSanitizer
   ) {
     this.darshan = [];
 
     this.helper.getDailyDarshan().subscribe(async (result: any) => {
-      const { imageUrls } = result;
+
+      const { imageUrls, createdAt } = result;
+      this.date = createdAt;
       this.isLoading = false;
       // for (let i = 0; i < urls.length; i++) {
       //   this.darshan[i] = { url: urls[i], fileName: '', isLoaded: false, local: ''};
@@ -140,6 +147,9 @@ export class Tab2Page {
       // this.storage.set('date', result.date);
 
     });
+  }
+  imgURL(url: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
   addDummyData(urls) {
     for (let i = 0; i < urls.length; i++) {
