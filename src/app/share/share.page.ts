@@ -21,14 +21,10 @@ export class SharePage implements OnInit {
 
   ngOnInit() {
     if (this.platform.is('ios')) {
-      this.db.object('/share/ios-share').valueChanges().subscribe((value: string) => {
-        this.shareUrl = value;
-      });
+      this.shareUrl = 'https://itunes.apple.com/in/app/shri-madhusudan-bapuji/id1252673961?ls=1&mt=8';
     }
     if (this.platform.is('android')) {
-      this.db.object('/share/android-share').valueChanges().subscribe((value: string) => {
-        this.shareUrl = value;
-      });
+      this.shareUrl = 'https://play.google.com/store/apps/details?id=com.krishna.app&hl=en';
     }
   }
 
@@ -36,7 +32,7 @@ export class SharePage implements OnInit {
     if (this.shareUrl) {
       this.socialSharing
         .share(
-          `Shri Madhusudan Bapuji\n${this.shareUrl}`,
+          `Shri Madhusudan Bapuji\n\n${this.shareUrl}`,
           null,
           null,
           null
