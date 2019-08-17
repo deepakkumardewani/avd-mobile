@@ -27,11 +27,14 @@ export class FcmService {
       }
 
       if (this.platform.is('ios')) {
-        await this.firebaseNative.grantPermission();
-        token = await this.firebaseNative.getToken();
-      }
+        const hasPermission = await this.firebaseNative.hasPermission();
 
-      return this.saveTokenToFirestore(token);
+        if (!hasPermission.isEnabled) {
+          await this.firebaseNative.grantPermission();
+          token = await this.firebaseNative.getToken();
+        }
+      }
+        return this.saveTokenToFirestore(token);
     }
 
     // Save the token to firestore
