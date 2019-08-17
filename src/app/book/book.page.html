@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Naam Ki Mahima</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab4"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+    <ion-item no-padding lines="none"  (click)="openLink('english')">
+      <img src="/assets/img/english.jpg" alt="nkm-english">
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
+    <ion-item no-padding lines="none"  (click)="openLink('hindi')">
+      <img src="/assets/img/hindi.jpg" alt="nkm-hindi">
+    </ion-item>
+  </ion-item-group>
+</ion-content>
