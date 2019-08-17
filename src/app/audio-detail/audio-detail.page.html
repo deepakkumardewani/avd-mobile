@@ -22,7 +22,7 @@
   <div class="controls">
     <div class="trackbar">
       <ion-range class="progress-range" [(ngModel)]="progress" min="0" [max]="totalDuration"
-        (ionChange)="changeProgress()" color="secondary">
+        (ionChange)="changeProgress()" (touchend)="touchEnd()" color="secondary">
       </ion-range>
       <div class="progress-labels">
         <ion-label class="start">{{duration | minuteSeconds}}</ion-label>

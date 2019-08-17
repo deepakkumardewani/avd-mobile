@@ -28,21 +28,22 @@ export class AudioDetailPage implements OnInit, OnDestroy {
   remainingDuration = 0;
   position = 0;
   file: MediaObject;
-  progress: number;
+  progress = 0;
   volume = 50;
-  progValue = 0;
-
   isLoaded = false;
+  isFocus = false;
+  isBlur = false;
+  isProgressUpdating = false;
 
   constructor(
     public modalController: ModalController,
     private media: Media,
     private socialSharing: SocialSharing,
     private platform: Platform
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.file = this.media.create(this.normalizeURL(this.audioData.title));
+    this.file = this.media.create(this.normalizeURL(this.audioData._id));
     this.file.play();
     if (this.platform.is('android')) {
       this.file.pause();
@@ -60,19 +61,20 @@ export class AudioDetailPage implements OnInit, OnDestroy {
       this.totalDuration = Math.floor(this.file.getDuration());
     }); // fires when file status changes
 
-    setInterval(() => {
-      this.file.getCurrentPosition().then(position => {
-        this.position = Math.floor(position);
-        if (this.isPlaying) {
-          this.duration = this.position;
-          this.remaining = this.remaining - 1;
-          if (this.position === -1) {
-            this.duration = 0;
-            this.remaining = 0;
-            this.isPlaying = false;
-          }
+    setInterval(async () => {
+      const position = await this.file.getCurrentPosition();
+      this.position = Math.floor(position);
+      if (this.isPlaying) {
+        this.duration = this.position;
+        this.progress = this.position;
+        this.remaining = this.remaining - 1;
+        if (this.position === -1) {
+          console.log('audio ended');
+          this.duration = 0;
+          this.remaining = this.totalDuration;
+          this.isPlaying = false;
         }
-      });
+      }
     }, 1000);
   }
 
@@ -101,12 +103,14 @@ export class AudioDetailPage implements OnInit, OnDestroy {
   }
 
   changeProgress() {
-    this.progValue = this.progress;
     this.duration = this.progress;
     this.remaining = this.totalDuration - this.progress;
-    this.file.seekTo(this.progress * 1000);
+
   }
 
+  touchEnd() {
+    this.file.seekTo(this.progress * 1000);
+  }
   changeVolume() {
     this.file.setVolume(this.volume / 100);
   }
@@ -118,7 +122,7 @@ export class AudioDetailPage implements OnInit, OnDestroy {
       .share(
         null,
         null,
-        this.normalizeURL(this.audioData.title),
+        this.normalizeURL(this.audioData._id),
         null
       )
       .then(() => {
@@ -131,8 +135,8 @@ export class AudioDetailPage implements OnInit, OnDestroy {
       });
   }
 
-  normalizeURL(title) {
-    const url = `${cordova.file.dataDirectory}audios/${title}.mp3`;
+  normalizeURL(_id) {
+    const url = `${cordova.file.dataDirectory}audios/${_id}.mp3`;
     return url.replace(/^file:\/\//, '');
   }
 }
