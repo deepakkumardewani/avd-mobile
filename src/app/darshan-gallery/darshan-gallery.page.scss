@@ -1,18 +1,68 @@
 ion-slide {
     ion-img {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
 }
 
 .image {
     height: 90vh;
+}
+
+.parent {
+    height: 90vh;
+
+    .background {
+        background: #ffffffa3;
+        border-radius: 50%;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        margin: auto;
+        top: 47%;
+    }
+
+    .download-icon {
+        width: 40px;
+        height: 40px;
+        color: black;
+    }
+
+    .spinner {
+        left: 0;
+        right: 0;
+        z-index: 1;
+        position: absolute;
+    }
+
+    img {
+        max-height: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+}
+
+.placeholder {
+    // height: 20vh;
+    // @extend .animated-background;
+    // width: 98vw;
+    filter: blur(6px);
 }

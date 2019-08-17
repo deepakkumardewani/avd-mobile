@@ -1,12 +1,14 @@
 <ion-header>
   <ion-toolbar color="dark">
-    <!-- <ion-title>darshan-gallery</ion-title> -->
     <ion-buttons slot="secondary">
         <ion-button (click)="close()">
           <ion-icon slot="icon-only" name="close"></ion-icon>
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
+          <ion-button (click)="presentSaveImageAlert()">
+              <ion-icon slot="icon-only" name="download"></ion-icon>
+            </ion-button>
           <ion-button (click)="shareImage()">
             <ion-icon slot="icon-only" name="share"></ion-icon>
           </ion-button>
@@ -16,10 +18,16 @@
 
 <ion-content no-padding color="dark" scrollY="false">
   <ion-slides #slides pager="true" [options]="slideOpts">
-    <ion-slide *ngFor="let image of images">
-      <div class="image">
-        <!-- <ion-img class="darshan-image" [src]="image?.url" alt=""></ion-img> -->
+    <ion-slide *ngFor="let image of images; let i = index">
+      <div [hidden]="!(image?.isDownloaded | async) || !image?.isLoaded" class="image">
         <ion-img class="darshan-image" [src]="normalizeURL(image?.fileName)" alt=""></ion-img>
+      </div>
+      <div [hidden]="(image?.isDownloaded | async) || image?.isLoaded" class="parent">
+        <div class="background">
+            <ion-spinner *ngIf="!image?.isError || image?.isLoading" color="dark" name="crescent"></ion-spinner>
+            <ion-icon *ngIf="image?.isError" (click)="downloadImage(image, i)"  class="download-icon" name="arrow-round-down"></ion-icon>
+        </div>
+        <img [src]="image?.placeholder" alt="placeholder" class="placeholder">
       </div>
     </ion-slide>
   </ion-slides>
