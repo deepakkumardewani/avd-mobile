@@ -2,12 +2,14 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ModalController, ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import {
   FileTransfer,
   FileTransferObject
 } from '@ionic-native/file-transfer/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { Audio } from './../models/audio';
 import { AudioDetailPage } from './../audio-detail/audio-detail.page';
@@ -37,11 +39,12 @@ export class Tab1Page implements OnInit {
     private file: File,
     private ref: ChangeDetectorRef,
     public toastController: ToastController,
-    private storage: Storage,
     // tslint:disable-next-line: deprecation
     private transfer: FileTransfer,
-    public alertController: AlertController
-  ) {}
+    public alertController: AlertController,
+    private socialSharing: SocialSharing,
+    private platform: Platform
+  ) { }
 
   ngOnInit() {
     const self = this;
@@ -51,22 +54,23 @@ export class Tab1Page implements OnInit {
       this.totalAudios = result.total;
       for (let i = 0; i < result.docs.length; i++) {
         const audio = result.docs[i];
-        const { title, url, subTitle } = audio;
+        const { title, url, subTitle, _id } = audio;
         this.audios[i] = {
+          _id,
           title,
           url,
           subTitle,
           isSaved: false,
-          isDownloaded: self.checkIfDownloaded(title)
+          isDownloaded: self.checkIfDownloaded(_id)
         };
       }
       this.isLoading = false;
     });
   }
 
-  checkIfDownloaded(title): Promise<boolean> {
+  checkIfDownloaded(_id: string): Promise<boolean> {
     return this.file
-      .checkFile(cordova.file.dataDirectory + 'audios/', title + '.mp3').
+      .checkFile(cordova.file.dataDirectory + 'audios/', _id + '.mp3').
       then(_ => {
         return true;
       }).
@@ -76,7 +80,7 @@ export class Tab1Page implements OnInit {
   }
 
   removeFile(audio: Audio) {
-    this.file.removeFile(cordova.file.dataDirectory + 'audios/', audio.title + '.mp3')
+    this.file.removeFile(cordova.file.dataDirectory + 'audios/', audio._id + '.mp3')
       .then(_ => {
         audio.isDownloaded = this.checkIfDownloaded(audio.title);
       })
@@ -85,25 +89,25 @@ export class Tab1Page implements OnInit {
       });
   }
   download(audio: Audio) {
-    const { title, url } = audio;
+    const { url, _id } = audio;
     const fileTransfer: FileTransferObject = this.transfer.create();
     this.isDownloadBtnDisabled = true;
     audio.isDownloading = true;
     audio.progress = 0;
     fileTransfer
-      .download(url, cordova.file.dataDirectory + 'audios/' + title + '.mp3')
+      .download(url, cordova.file.dataDirectory + 'audios/' + _id + '.mp3')
       .then(
         _ => {
           this.isDownloadBtnDisabled = false;
           audio.isDownloading = false;
-          audio.isDownloaded = this.checkIfDownloaded(title);
+          audio.isDownloaded = this.checkIfDownloaded(_id);
         },
         _ => {
           // handle error
           this.errorToast('Hare Krishna. There was some error. Please try again.');
           this.isDownloadBtnDisabled = false;
           audio.isDownloading = false;
-          audio.isDownloaded = this.checkIfDownloaded(title);
+          audio.isDownloaded = this.checkIfDownloaded(_id);
           audio.audioPath = '';
         }
       );
@@ -128,13 +132,14 @@ export class Tab1Page implements OnInit {
       this.totalAudios = result.total;
       for (let i = 0; i < result.docs.length; i++) {
         const audio = result.docs[i];
-        const { title, url, subTitle } = audio;
+        const { title, url, subTitle, _id } = audio;
         this.audios[i] = {
+          _id,
           title,
           url,
           subTitle,
           isSaved: false,
-          isDownloaded: self.checkIfDownloaded(title)
+          isDownloaded: self.checkIfDownloaded(_id)
         };
       }
       this.isLoading = false;
@@ -157,13 +162,14 @@ export class Tab1Page implements OnInit {
     this.page++;
     this.helper.getAllAudio(this.page, this.limit).subscribe((result: any) => {
       const audios = result.docs.map((audio) => {
-        const { title, url, subTitle } = audio;
+        const { title, url, subTitle, _id } = audio;
         return new Audio({
+          _id,
           title,
           url,
           subTitle,
           isSaved: false,
-          isDownloaded: self.checkIfDownloaded(title)
+          isDownloaded: self.checkIfDownloaded(_id)
         });
       });
       this.audios = [...this.audios, ...audios];
@@ -206,6 +212,32 @@ export class Tab1Page implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async shareAudio(audio: Audio) {
+    this.socialSharing
+      .share(
+        null,
+        null,
+        this.normalizeURL(audio._id),
+        null
+      )
+      .then(() => {
+        console.log('success');
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+  }
+
+  normalizeURL(_id: string) {
+    const url = `${cordova.file.dataDirectory}audios/${_id}.mp3`;
+    if (this.platform.is('android')) {
+      return url;
+    }
+    if (this.platform.is('ios')) {
+      return url.replace(/^file:\/\//, '');
+    }
   }
 
   addDummyData(length) {

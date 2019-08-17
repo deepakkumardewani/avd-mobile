@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content>
+  <!-- show when data is loading -->
   <ion-list class="audio-list" *ngIf="isLoading">
       <ion-item class="audio-item" *ngFor="let audio of audios">
         <ion-label text-wrap>
@@ -32,9 +33,11 @@
         </ion-buttons>
       </ion-item>
     </ion-list>
+
+    <!-- show when data is loaded -->
   <ion-list class="audio-list" *ngIf="!isLoading">
     <ion-item class="audio-item" *ngFor="let audio of audios">
-      <ion-label text-wrap>
+      <ion-label text-wrap (click)="presentModal(audio)">
         <h2 class="title">{{audio?.title}}</h2>
         <p class="subTitle">{{audio?.subTitle}}</p>
         <ion-progress-bar *ngIf="audio?.isDownloading" [value]="audio?.progress / 100"></ion-progress-bar>
@@ -47,9 +50,9 @@
           <ion-icon [ngClass]="{'disabled': isDownloadBtnDisabled, 'enabled': !isDownloadBtnDisabled }" slot="icon-only"
             name="arrow-round-down"></ion-icon>
         </ion-button>
-        <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="presentModal(audio)">
+        <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="shareAudio(audio)">
           <ion-icon [ngClass]="{'disabled': !(audio?.isDownloaded | async), 'enabled': audio?.isDownloaded | async }"
-            slot="icon-only" name="play"></ion-icon>
+            slot="icon-only" name="share"></ion-icon>
         </ion-button>
         <ion-button fill="clear" [disabled]="!(audio?.isDownloaded | async)" (click)="presentDeleteAlert(audio)">
           <ion-icon [ngClass]="{'disabled': !(audio?.isDownloaded | async), 'enabled': (audio?.isDownloaded | async) }"
@@ -59,7 +62,7 @@
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
