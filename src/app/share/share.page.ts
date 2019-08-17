@@ -21,10 +21,10 @@ export class SharePage implements OnInit {
 
   ngOnInit() {
     if (this.platform.is('ios')) {
-      this.shareUrl = 'https://itunes.apple.com/in/app/shri-madhusudan-bapuji/id1252673961?ls=1&mt=8';
+      this.shareUrl = 'https://bit.ly/bapuji-ios';
     }
     if (this.platform.is('android')) {
-      this.shareUrl = 'https://play.google.com/store/apps/details?id=com.krishna.app&hl=en';
+      this.shareUrl = 'https://bit.ly/bapuji-android';
     }
   }
 
