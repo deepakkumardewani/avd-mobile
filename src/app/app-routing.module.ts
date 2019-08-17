@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'video-detail', loadChildren: './video-detail/video-detail.module#VideoDetailPageModule' },
   { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
   { path: 'contact', loadChildren: './contact/contact.module#ContactPageModule' },
-  { path: 'share', loadChildren: './share/share.module#SharePageModule' }
+  { path: 'share', loadChildren: './share/share.module#SharePageModule' },
+  { path: 'book', loadChildren: './book/book.module#BookPageModule' }
 ];
 @NgModule({
   imports: [
